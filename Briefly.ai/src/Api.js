@@ -1,6 +1,7 @@
+const api= import.meta.env.VITE_OLLAMA_API
 export const summerizeWithOllama = async (text)=>{
     try{
-     const res= await fetch('http://localhost:11434/api/generate',{
+     const res= await fetch(api,{
         method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
