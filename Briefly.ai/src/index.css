@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Add this line to enable manual dark mode toggling */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Optional: Add a smooth transition for background colors */
+@layer base {
+  body {
+    @apply transition-colors duration-300;
+  }
+}
