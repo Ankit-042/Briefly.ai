@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useDarkMode } from './useDarkMode.js';
+import light from '../src/assets/light-mode.png'
+import dark from './assets/night-mode.png'
 import './index.css'
 import {summerizeWithOllama} from '../src/Api.js'
 import { text_extraction } from '../src/Extract.js';
@@ -64,12 +66,33 @@ const clear_summary=()=>{
         
         
         {/* Modern Toggle Switch */}
-        <button 
-          onClick={toggleDarkMode}
-          className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 transition-all hover:scale-110"
-        >
-          {isDark ? '☀️' : '🌙'}
-        </button>
+       {/* Modern Animated Toggle Switch */}
+<button
+  onClick={toggleDarkMode}
+  // 1. The Track Container
+  className="relative h-8 w-16 rounded-full p-1 transition-colors duration-300 focus:outline-none bg-slate-200 dark:bg-slate-800"
+  aria-label="Toggle Dark Mode"
+>
+  {/* 2. The Icons Layer (Static, sits on top with z-10) */}
+  <div className="relative z-10 flex h-full w-full items-center justify-between px-1.5">
+    {/* Sun Icon - slightly faded when dark mode is active */}
+    <span className={`text-sm transition-opacity duration-300 ${isDark ? 'opacity-100' : 'opacity-0'}`}>
+    <img src={light} alt='light icon' className='w-4 h-4' />
+    </span>
+    {/* Moon Icon - slightly faded when light mode is active */}
+    <span className={`text-sm transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-100'}`}>
+    <img src={dark} alt='dark icon' className='w-4 h-4'/>
+    </span>
+  </div>
+
+  {/* 3. The Sliding Knob (Absolute position behind icons) */}
+  <span
+    className={`absolute left-1 top-1 h-6 w-6 rounded-full bg-white shadow-sm transition-transform duration-300 ease-in-out dark:bg-slate-400 ${
+      // This controls the slide animation
+      isDark ? 'translate-x-8' : 'translate-x-0'
+    }`}
+  ></span>
+</button>
         </div>
       </div>
 
